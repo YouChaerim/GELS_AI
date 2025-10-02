@@ -1,8 +1,12 @@
+console.log('[DATA.JS] === data.js 파일 로드 시작 ===');
+
 window.data = (function(){
   // 디버깅을 위한 로그 함수
   function debugLog(message, data) {
     console.log(`[DATA.JS] ${message}`, data || '');
   }
+  
+  console.log('[DATA.JS] window.data 객체 생성 중...');
 
   async function fetchPosts(params){
     debugLog('=== fetchPosts 호출 ===');
@@ -84,7 +88,11 @@ window.data = (function(){
   function priceFormat(n){
     try{ return '₩' + Number(n).toLocaleString('ko-KR'); }catch{ return '₩' + n; }
   }
+  
+  console.log('[DATA.JS] ✅ 모든 함수 정의 완료');
   return { fetchPosts, fetchPostDetail, fetchSubjects, priceFormat };
 })();
+
+console.log('[DATA.JS] ✅ window.data 객체 생성 완료:', window.data);
 
 

@@ -1,9 +1,18 @@
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
+  console.log('[INDEX.JS] === DOM 로드 완료, 스크립트 시작 ===');
+  
   const params = new URLSearchParams(location.search);
   const subject = document.getElementById('subject');
   const condition = document.getElementById('condition');
   const sort = document.getElementById('sort');
   const applyBtn = document.getElementById('filterApply');
+  
+  console.log('[INDEX.JS] DOM 요소 확인:', {
+    subject: !!subject,
+    condition: !!condition,
+    sort: !!sort,
+    applyBtn: !!applyBtn
+  });
 
   // Populate subjects from backend (lowercased)
   console.log('[INDEX.JS] 과목 목록 로딩 시작');
@@ -143,6 +152,8 @@
     if (!el) return;
     el.addEventListener('change', renderGrid);
   });
-})();
+  
+  console.log('[INDEX.JS] ✅ 모든 이벤트 리스너 등록 완료');
+});
 
 

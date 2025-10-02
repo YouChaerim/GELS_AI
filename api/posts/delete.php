@@ -33,34 +33,64 @@ if ($errors) {
 }
 
 try {
+	$startTime = microtime(true);
+	error_log("[DELETE.PHP] === 처리 시작 ===");
+	error_log("[DELETE.PHP] 요청 데이터: ID=$id, verify_only=$verifyOnly");
+	
 	// First, verify the post exists and password matches
+	$queryStart = microtime(true);
 	$stmt = $pdo->prepare('SELECT id, password_hash, title FROM posts WHERE id = ?');
 	$stmt->execute([$id]);
 	$post = $stmt->fetch();
+	$queryTime = (microtime(true) - $queryStart) * 1000;
+	error_log("[DELETE.PHP] DB 조회 완료: " . round($queryTime, 2) . "ms");
 	
 	if (!$post) {
 		respond_json(['error'=>['code'=>'NOT_FOUND','message'=>'게시글을 찾을 수 없습니다']], 404);
 	}
 	
-	// TEMPORARY: Plain text comparison for debugging
-	// TODO: Change back to password_verify() after testing
-	if ($password !== $post['password_hash']) {
+	error_log("[DELETE.PHP] 비밀번호 검증 시작");
+	error_log("[DELETE.PHP] 입력 비밀번호 길이: " . strlen($password));
+	error_log("[DELETE.PHP] 저장된 비밀번호 길이: " . strlen($post['password_hash']));
+	error_log("[DELETE.PHP] 저장된 비밀번호 시작 문자: " . substr($post['password_hash'], 0, 10));
+	
+	// Check if stored password is hashed (starts with $2y$ for bcrypt)
+	$isHashed = strpos($post['password_hash'], '$2y$') === 0;
+	error_log("[DELETE.PHP] 비밀번호 해시 여부: " . ($isHashed ? 'YES' : 'NO'));
+	
+	$passwordMatch = false;
+	if ($isHashed) {
+		// Use password_verify for hashed passwords
+		$passwordMatch = password_verify($password, $post['password_hash']);
+		error_log("[DELETE.PHP] password_verify 결과: " . ($passwordMatch ? 'MATCH' : 'NO_MATCH'));
+	} else {
+		// Use plain text comparison for non-hashed passwords
+		$passwordMatch = ($password === $post['password_hash']);
+		error_log("[DELETE.PHP] 평문 비교 결과: " . ($passwordMatch ? 'MATCH' : 'NO_MATCH'));
+	}
+	
+	if (!$passwordMatch) {
+		error_log("[DELETE.PHP] 비밀번호 불일치 - 인증 실패");
 		respond_json(['error'=>[
 			'code'=>'UNAUTHORIZED',
 			'message'=>'비밀번호가 일치하지 않습니다',
 			'_debug'=>[
-				'input_password'=>$password,
-				'stored_password'=>$post['password_hash'],
 				'input_password_length'=>strlen($password),
 				'stored_password_length'=>strlen($post['password_hash']),
+				'is_hashed'=>$isHashed,
 				'post_id'=>$post['id'],
-				'verify_only'=>$verifyOnly
+				'verify_only'=>$verifyOnly,
+				'password_starts_with'=>substr($post['password_hash'], 0, 10)
 			]
 		]], 401);
 	}
 	
+	error_log("[DELETE.PHP] 비밀번호 검증 성공");
+	
 	// If verify_only flag is set, just return success without deleting
 	if ($verifyOnly) {
+		$totalTime = (microtime(true) - $startTime) * 1000;
+		error_log("[DELETE.PHP] 비밀번호 검증 완료: " . round($totalTime, 2) . "ms");
 		respond_json(['verified'=>true,'message'=>'비밀번호가 확인되었습니다','id'=>$id,'title'=>$post['title']]);
 	}
 	

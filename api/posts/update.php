@@ -21,6 +21,7 @@ $input = $isJson ? (json_decode($raw, true) ?: []) : $_POST;
 
 $id = isset($input['id']) ? (int)$input['id'] : 0;
 $password = (string)($input['password'] ?? '');
+$authToken = (string)($input['auth_token'] ?? '');
 $nickname = trim($input['nickname'] ?? '');
 $title    = trim($input['title'] ?? '');
 $author   = trim($input['author'] ?? '');
@@ -34,7 +35,15 @@ $content  = trim($input['content'] ?? '');
 // Validate required fields
 $errors = [];
 if ($id <= 0) $errors['id'] = 'ID는 필수';
-if ($password === '' || strlen($password) < 4) $errors['password'] = '비밀번호는 4자 이상';
+
+// Check if we have either password or auth token
+$hasPassword = $password !== '' && strlen($password) >= 4;
+$hasAuthToken = $authToken !== '';
+
+if (!$hasPassword && !$hasAuthToken) {
+	$errors['auth'] = '비밀번호 또는 인증 토큰이 필요합니다';
+}
+
 if ($nickname === '' || mb_strlen($nickname) < 2) $errors['nickname'] = '닉네임은 2자 이상';
 if ($title === '' || mb_strlen($title) < 2) $errors['title'] = '제목은 2자 이상';
 if ($subject === '') $errors['subject'] = '과목은 필수';
@@ -51,12 +60,13 @@ try {
 	// Enhanced debugging - log all input data
 	error_log("UPDATE DEBUG - Input data: " . json_encode([
 		'id' => $id,
-		'password' => $password,
+		'has_password' => $hasPassword,
+		'has_auth_token' => $hasAuthToken,
 		'nickname' => $nickname,
 		'title' => $title
 	]));
 	
-	// First, verify the post exists and password matches
+	// First, verify the post exists
 	$stmt = $pdo->prepare('SELECT id, password_hash, nickname, title FROM posts WHERE id = ?');
 	$stmt->execute([$id]);
 	$post = $stmt->fetch();
@@ -67,18 +77,64 @@ try {
 		respond_json(['error'=>['code'=>'NOT_FOUND','message'=>'게시글을 찾을 수 없습니다','_debug'=>['searched_id'=>$id]]], 404);
 	}
 	
-	// TEMPORARY: Plain text comparison for debugging
-	// TODO: Change back to password_verify() after testing
-	if ($password !== $post['password_hash']) {
+	// Verify authentication (password or auth token)
+	$authValid = false;
+	
+	if ($hasAuthToken) {
+		// Validate auth token
+		try {
+			$decoded = base64_decode($authToken);
+			$parts = explode(':', $decoded);
+			if (count($parts) === 3 && $parts[0] == $id) {
+				$tokenPassword = $parts[1];
+				$timestamp = (int)$parts[2];
+				$now = time() * 1000; // Convert to milliseconds
+				
+				// Check if token is not expired (30 minutes = 1800000 ms)
+				if (($now - $timestamp) < 1800000) {
+					// Verify the password in the token matches the stored password
+					if ($tokenPassword === $post['password_hash']) {
+						$authValid = true;
+						error_log("UPDATE DEBUG - Auth token validation successful");
+					} else {
+						error_log("UPDATE DEBUG - Auth token password mismatch");
+					}
+				} else {
+					error_log("UPDATE DEBUG - Auth token expired");
+				}
+			} else {
+				error_log("UPDATE DEBUG - Invalid auth token format");
+			}
+		} catch (Exception $e) {
+			error_log("UPDATE DEBUG - Auth token decode error: " . $e->getMessage());
+		}
+	} else if ($hasPassword) {
+		error_log("UPDATE DEBUG - 비밀번호 직접 검증 시작");
+		error_log("UPDATE DEBUG - 입력 비밀번호 길이: " . strlen($password));
+		error_log("UPDATE DEBUG - 저장된 비밀번호 길이: " . strlen($post['password_hash']));
+		
+		// Check if stored password is hashed (starts with $2y$ for bcrypt)
+		$isHashed = strpos($post['password_hash'], '$2y$') === 0;
+		error_log("UPDATE DEBUG - 비밀번호 해시 여부: " . ($isHashed ? 'YES' : 'NO'));
+		
+		if ($isHashed) {
+			// Use password_verify for hashed passwords
+			$authValid = password_verify($password, $post['password_hash']);
+			error_log("UPDATE DEBUG - password_verify 결과: " . ($authValid ? 'MATCH' : 'NO_MATCH'));
+		} else {
+			// Use plain text comparison for non-hashed passwords
+			$authValid = ($password === $post['password_hash']);
+			error_log("UPDATE DEBUG - 평문 비교 결과: " . ($authValid ? 'MATCH' : 'NO_MATCH'));
+		}
+	}
+	
+	if (!$authValid) {
 		respond_json(['error'=>[
 			'code'=>'UNAUTHORIZED',
-			'message'=>'비밀번호가 일치하지 않습니다',
+			'message'=>'인증에 실패했습니다',
 			'_debug'=>[
-				'input_password'=>$password,
-				'stored_password'=>$post['password_hash'],
-				'passwords_match'=>($password === $post['password_hash']),
-				'input_password_length'=>strlen($password),
-				'stored_password_length'=>strlen($post['password_hash']),
+				'has_password'=>$hasPassword,
+				'has_auth_token'=>$hasAuthToken,
 				'post_id'=>$post['id']
 			]
 		]], 401);
