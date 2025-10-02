@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookLoop - 거래 가이드</title>
+  <link rel="stylesheet" href="/assets/css/base/reset.css">
+  <link rel="stylesheet" href="/assets/css/base/variables.css">
+  <link rel="stylesheet" href="/assets/css/base/utilities.css">
+  <link rel="stylesheet" href="/assets/css/components/header.css">
+  <link rel="stylesheet" href="/assets/css/components/nav.css">
+  <link rel="stylesheet" href="/assets/css/components/footer.css">
+  <link rel="stylesheet" href="/assets/css/components/form.css">
+  <link rel="stylesheet" href="/assets/css/pages/guide.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <header class="bl-header" role="banner">
+    <div class="bl-header__inner">
+      <a class="bl-logo" href="/pages/index.html">BookLoop</a>
+      <form class="bl-quicksearch" aria-label="상단 검색">
+        <label class="sr-only" for="q">제목/저자/과목</label>
+        <input id="q" name="q" type="search" placeholder="제목/저자/과목">
+        <button type="submit">검색</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="bl-nav" role="navigation" aria-label="주요 메뉴">
+    <ul class="bl-nav__menu">
+      <li><a href="/pages/index.html">메인</a></li>
+      <li><a href="/pages/list.html">교환 게시판</a></li>
+      <li><a href="/pages/guide.html" aria-current="page">거래 가이드</a></li>
+      <li><a href="/pages/write.html">글쓰기</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="bl-main" role="main">
+    <section class="bl-guide" aria-labelledby="guideTitle">
+      <h1 id="guideTitle">거래 가이드 & 체크리스트</h1>
+
+      <section class="bl-guide__section" aria-labelledby="checklistTitle">
+        <h2 id="checklistTitle">체크리스트</h2>
+        <ul class="bl-checklist" data-role="checklist">
+          <li><label><input type="checkbox" data-key="public-place"> 캠퍼스 내 공개된 장소에서 만남</label></li>
+          <li><label><input type="checkbox" data-key="daytime"> 낮 시간대/동행 권장</label></li>
+          <li><label><input type="checkbox" data-key="condition"> 상태 확인(필기/파손/페이지 누락)</label></li>
+          <li><label><input type="checkbox" data-key="payment"> 현금/핸드폰결제 사기 주의</label></li>
+          <li><label><input type="checkbox" data-key="privacy"> 거래 후 연락처 보관 정책</label></li>
+        </ul>
+        <div class="bl-guide__actions">
+          <button class="btn" id="checklistClear">체크 초기화</button>
+        </div>
+      </section>
+
+      <section class="bl-guide__section" aria-labelledby="placeTitle">
+        <h2 id="placeTitle">교내 만남 장소 추천</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>도서관 1층 로비</h3>
+            <p class="muted">밝고 사람이 많은 장소</p>
+          </div>
+          <div class="card">
+            <h3>공학관 카페 앞</h3>
+            <p class="muted">CCTV/유동인구 多</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bl-guide__section" aria-labelledby="faqTitle">
+        <h2 id="faqTitle">자주 묻는 질문(FAQ)</h2>
+        <details>
+          <summary>가격 협상은 어디서 하나요?</summary>
+          <p>게시글/댓글로 사전 조율하거나, 연락 수단으로 직접 협의하세요.</p>
+        </details>
+        <details>
+          <summary>택배 거래도 가능한가요?</summary>
+          <p>가능하지만 선입금은 지양하고, 안전결제/에스크로를 권장합니다.</p>
+        </details>
+      </section>
+    </section>
+  </main>
+
+  <footer class="bl-footer" role="contentinfo">
+    <a href="mailto:contact@bookloop.local">신고/문의</a>
+    <span aria-hidden="true">|</span>
+    <a href="#">간단 개인정보 처리 정책</a>
+  </footer>
+
+  <script src="/assets/js/core/dom.js"></script>
+  <script src="/assets/js/pages/guide.js"></script>
+</body>
+</html>
+
+

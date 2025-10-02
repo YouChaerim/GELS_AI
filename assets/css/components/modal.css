@@ -1,0 +1,5 @@
+.modal{position:fixed; inset:0; background:rgba(0,0,0,.4); display:none}
+.modal.is-open{display:block}
+.modal__panel{background:#fff; border-radius:12px; max-width:560px; margin:10vh auto; padding:20px}
+
+

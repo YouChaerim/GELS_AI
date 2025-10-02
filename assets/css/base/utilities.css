@@ -1,0 +1,14 @@
+.container{max-width:var(--container); margin:0 auto; padding:0 16px}
+.grid{display:grid; gap:16px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-auto{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.flex{display:flex; gap:8px}
+.between{justify-content:space-between; align-items:center}
+.center{align-items:center}
+.badge{display:inline-block; padding:2px 8px; font-size:12px; border-radius:999px; background:#eef2ff}
+.btn{display:inline-flex; gap:6px; align-items:center; padding:10px 14px; border-radius:8px; border:1px solid var(--bl-border); background:#fff; cursor:pointer}
+.btn--primary{background:var(--bl-primary); color:#fff; border-color:transparent}
+.muted{color:var(--bl-muted)}
+.hidden{display:none !important}
+
+

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookLoop - 글쓰기</title>
+  <link rel="stylesheet" href="/assets/css/base/reset.css">
+  <link rel="stylesheet" href="/assets/css/base/variables.css">
+  <link rel="stylesheet" href="/assets/css/base/utilities.css">
+  <link rel="stylesheet" href="/assets/css/components/header.css">
+  <link rel="stylesheet" href="/assets/css/components/nav.css">
+  <link rel="stylesheet" href="/assets/css/components/footer.css">
+  <link rel="stylesheet" href="/assets/css/components/form.css">
+  <link rel="stylesheet" href="/assets/css/pages/write.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <header class="bl-header" role="banner">
+    <div class="bl-header__inner">
+      <a class="bl-logo" href="/pages/index.html">BookLoop</a>
+      <form class="bl-quicksearch" aria-label="상단 검색">
+        <label class="sr-only" for="q">제목/저자/과목</label>
+        <input id="q" name="q" type="search" placeholder="제목/저자/과목">
+        <button type="submit">검색</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="bl-nav" role="navigation" aria-label="주요 메뉴">
+    <ul class="bl-nav__menu">
+      <li><a href="/pages/index.html">메인</a></li>
+      <li><a href="/pages/list.html">교환 게시판</a></li>
+      <li><a href="/pages/guide.html">거래 가이드</a></li>
+      <li><a href="/pages/write.html" aria-current="page">글쓰기</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="bl-main" role="main">
+    <article class="bl-write" aria-labelledby="writeTitle">
+      <h1 id="writeTitle">글쓰기</h1>
+
+      <form class="bl-form" id="writeForm" novalidate method="post" action="../api/posts/create.php">
+        <fieldset class="bl-fieldset">
+          <legend>기본 정보</legend>
+          <div class="bl-form__row">
+            <label>제목
+              <input type="text" name="title" placeholder="책 제목" required>
+            </label>
+            <label>저자
+              <input type="text" name="author" placeholder="저자명">
+            </label>
+          </div>
+          <div class="bl-form__row">
+            <label>과목
+              <input type="text" name="subject" placeholder="예: OS, DB" required>
+            </label>
+            <label>상태
+              <select name="condition" required>
+                <option value="">선택</option>
+                <option value="상">상</option>
+                <option value="중">중</option>
+                <option value="하">하</option>
+              </select>
+            </label>
+            <label>희망가(원)
+              <input type="number" name="price_won" min="0" step="1" placeholder="0" required>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="bl-fieldset">
+          <legend>연락 및 작성자</legend>
+          <div class="bl-form__row">
+            <label>연락 수단
+              <input type="text" name="contact" placeholder="카톡ID/이메일/전화 등" required>
+            </label>
+            <label>닉네임
+              <input type="text" name="nickname" placeholder="닉네임" required>
+            </label>
+            <label>글 비밀번호
+              <input type="password" name="password" placeholder="수정/삭제 시 사용" required>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="bl-fieldset">
+          <legend>상세 설명</legend>
+          <textarea name="content" rows="8" placeholder="책 상태, 판형, 주의사항 등" required></textarea>
+          <p class="muted">※ 내용은 5자 이상 입력해주세요.</p>
+        </fieldset>
+
+        <fieldset class="bl-fieldset">
+          <legend>이미지 업로드(선택)</legend>
+          <input type="file" name="images" accept="image/*" multiple>
+          <p class="muted">※ 업로드 정책(예: 최대 5장, 5MB, JPG/PNG) 추후 확정</p>
+        </fieldset>
+
+        <div class="bl-actions">
+          <button type="submit" class="btn btn--primary">등록</button>
+          <a class="btn" href="/pages/list.html">취소</a>
+        </div>
+      </form>
+
+      <section class="bl-write__guide" aria-label="작성 가이드">
+        <h2>작성 가이드</h2>
+        <ul>
+          <li>상태를 구체적으로 설명하세요(표지/내지/필기/훼손 등).</li>
+          <li>개인정보 과도 기재 금지(주민번호/계좌 비밀번호 등).</li>
+          <li>직거래 시 공공장소에서 만남을 권장합니다.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="bl-footer" role="contentinfo">
+    <small class="muted">게시 가이드 및 금지 항목을 준수해주세요.</small>
+  </footer>
+
+  <script src="/assets/js/core/dom.js"></script>
+  <script src="/assets/js/core/data.js"></script>
+  <script src="/assets/js/pages/write.js"></script>
+</body>
+</html>
+
+

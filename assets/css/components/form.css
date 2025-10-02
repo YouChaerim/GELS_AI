@@ -1,0 +1,6 @@
+.bl-filters{max-width:var(--container); margin:16px auto; padding:0 16px}
+.bl-filters__row{display:flex; gap:10px; flex-wrap:wrap}
+.bl-filters select, .bl-filters button, .bl-quicksearch input, .bl-quicksearch button{padding:12px 14px; border:1px solid var(--bl-border); border-radius:999px}
+.bl-filters select:focus{outline:2px solid var(--bl-primary-600); outline-offset:0}
+
+

@@ -1,0 +1,11 @@
+.bl-main{max-width:var(--container); margin:0 auto; padding:24px 16px}
+.bl-hero{background:var(--bl-surface); border:1px solid var(--bl-border); border-radius:var(--bl-radius); padding:22px; margin:16px 0}
+.bl-hero__desc{color:var(--bl-muted); margin:8px 0 12px}
+.bl-hero__cta{display:inline-block; padding:12px 16px; border-radius:999px; background:var(--bl-primary); color:#fff}
+.bl-filters{margin:16px 0}
+.bl-filters__row{display:flex; gap:10px; flex-wrap:wrap}
+.bl-filters select, .bl-filters button{padding:12px 14px; border:1px solid var(--bl-border); border-radius:999px}
+.bl-grid__head{display:flex; justify-content:space-between; align-items:center; margin:18px 0}
+.bl-grid__more{color:var(--bl-primary)}
+
+

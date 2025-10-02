@@ -1,0 +1,7 @@
+.bl-tablewrap{border:1px solid var(--bl-border); border-radius:var(--bl-radius); background:#fff; overflow:hidden}
+.bl-table{width:100%; border-collapse:separate; border-spacing:0}
+.bl-table th, .bl-table td{padding:12px; border-bottom:1px solid var(--bl-border); text-align:left}
+.bl-table thead th{background:var(--bl-surface); font-weight:600}
+.bl-emptystate{color:var(--bl-muted); padding:20px}
+
+

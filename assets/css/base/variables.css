@@ -1,0 +1,16 @@
+:root{
+  --bl-primary:#FF6F0F; /* warm orange */
+  --bl-primary-600:#f06000;
+  --bl-text:#111827;
+  --bl-muted:#667085;
+  --bl-bg:#ffffff;
+  --bl-surface:#FFF7EF; /* soft orange tint */
+  --bl-border:#f2e8e3;
+  --bl-radius:14px;
+  --bl-shadow:0 6px 18px rgba(17,24,39,.08);
+  --container:1080px;
+}
+html{font-family:system-ui,-apple-system,'Segoe UI',sans-serif; color:var(--bl-text); background:var(--bl-bg)}
+.container{max-width:var(--container); margin:0 auto; padding:0 16px}
+
+

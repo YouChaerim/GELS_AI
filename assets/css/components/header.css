@@ -1,0 +1,9 @@
+.bl-header{border-bottom:1px solid var(--bl-border); background:#fff}
+.bl-header__inner{display:flex; gap:16px; align-items:center; justify-content:space-between; padding:14px 0; max-width:var(--container); margin:0 auto; padding-left:16px; padding-right:16px}
+.bl-logo{font-weight:800; color:var(--bl-primary)}
+.bl-quicksearch{display:flex; gap:8px}
+.bl-quicksearch input{padding:12px 14px; border:1px solid var(--bl-border); border-radius:999px; min-width:240px; background:#fff}
+.bl-quicksearch input:focus{outline:2px solid var(--bl-primary-600); outline-offset:0}
+.bl-quicksearch button{padding:12px 16px; border-radius:999px; border:1px solid var(--bl-primary); background:var(--bl-primary); color:#fff}
+
+

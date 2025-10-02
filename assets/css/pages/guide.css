@@ -1,0 +1,8 @@
+.bl-main{max-width:var(--container); margin:0 auto; padding:24px 16px}
+.bl-guide__section{margin:20px 0}
+.bl-checklist{display:grid; gap:8px; padding:8px 0}
+.bl-guide__actions{margin-top:8px}
+.card{border:1px solid var(--bl-border); border-radius:var(--bl-radius); padding:12px; background:#fff}
+
+
+

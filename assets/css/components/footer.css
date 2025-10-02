@@ -1,0 +1,5 @@
+.bl-footer{border-top:1px solid var(--bl-border); background:#fff; margin-top:32px}
+.bl-footer{display:flex; gap:12px; align-items:center; justify-content:center; padding:20px}
+.bl-footer a{color:var(--bl-primary)}
+
+

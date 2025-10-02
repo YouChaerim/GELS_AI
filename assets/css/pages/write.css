@@ -1,0 +1,9 @@
+.bl-main{max-width:var(--container); margin:0 auto; padding:24px 16px}
+.bl-form{display:grid; gap:16px}
+.bl-fieldset{border:1px solid var(--bl-border); border-radius:var(--bl-radius); padding:16px}
+.bl-form__row{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.bl-form input, .bl-form select, .bl-form textarea{padding:10px 12px; border:1px solid var(--bl-border); border-radius:8px}
+.bl-actions{display:flex; gap:8px; margin-top:8px}
+.bl-write__guide{margin-top:20px}
+
+

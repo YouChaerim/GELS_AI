@@ -1,0 +1,23 @@
+.bl-main{max-width:var(--container); margin:0 auto; padding:24px 16px}
+.bl-view__header{border-bottom:1px solid var(--bl-border); padding-bottom:12px; margin-bottom:16px}
+.bl-view__title{font-size:22px; margin-bottom:6px}
+.bl-view__meta{display:flex; gap:10px; align-items:center; color:var(--bl-muted)}
+.badge{padding:2px 8px; border-radius:999px; background:#dcfce7}
+.bl-view__facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin-top:12px}
+.bl-view__facts dt{font-weight:600; color:var(--bl-muted)}
+.bl-view__facts dd{margin:0}
+.bl-view__content{margin:16px 0}
+.bl-view__text{line-height:1.6}
+.bl-view__thumbs{display:grid; gap:8px; grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.bl-view__contact .btn{margin-right:8px}
+.bl-comments ul{margin-left:16px}
+.bl-replies{margin-left:16px; display:grid; gap:8px}
+.bl-replyform{display:grid; gap:8px; margin:8px 0 0 16px}
+.bl-replyform input, .bl-replyform textarea{padding:10px 12px; border:1px solid var(--bl-border); border-radius:8px; width:100%}
+.bl-comments{display:grid; gap:12px; margin:12px 0}
+.bl-commentform{display:grid; gap:8px; margin-top:8px}
+.bl-commentform__row{display:flex; gap:8px; flex-wrap:wrap}
+.bl-commentform input, .bl-commentform textarea{padding:10px 12px; border:1px solid var(--bl-border); border-radius:8px; width:100%}
+.bl-commentform__actions{display:flex; justify-content:flex-end}
+
+

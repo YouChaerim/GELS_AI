@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookLoop - 게시글 상세</title>
+  <link rel="stylesheet" href="/assets/css/base/reset.css">
+  <link rel="stylesheet" href="/assets/css/base/variables.css">
+  <link rel="stylesheet" href="/assets/css/base/utilities.css">
+  <link rel="stylesheet" href="/assets/css/components/header.css">
+  <link rel="stylesheet" href="/assets/css/components/nav.css">
+  <link rel="stylesheet" href="/assets/css/components/footer.css">
+  <link rel="stylesheet" href="/assets/css/components/card.css">
+  <link rel="stylesheet" href="/assets/css/components/form.css">
+  <link rel="stylesheet" href="/assets/css/components/modal.css">
+  <link rel="stylesheet" href="/assets/css/pages/view.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <header class="bl-header" role="banner">
+    <div class="bl-header__inner">
+      <a class="bl-logo" href="/pages/index.html">BookLoop</a>
+      <form class="bl-quicksearch" aria-label="상단 검색">
+        <label class="sr-only" for="q">제목/저자/과목</label>
+        <input id="q" name="q" type="search" placeholder="제목/저자/과목">
+        <button type="submit">검색</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="bl-nav" role="navigation" aria-label="주요 메뉴">
+    <ul class="bl-nav__menu">
+      <li><a href="/pages/index.html">메인</a></li>
+      <li><a href="/pages/list.html">교환 게시판</a></li>
+      <li><a href="/pages/guide.html">거래 가이드</a></li>
+      <li><a href="/pages/write.html">글쓰기</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="bl-main" role="main">
+    <article class="bl-view" aria-labelledby="postTitle">
+      <header class="bl-view__header">
+        <h1 id="postTitle" class="bl-view__title">운영체제 콘셉트 10판</h1>
+        <div class="bl-view__meta">
+          <span class="badge" aria-label="상태 상">상</span>
+          <span class="bl-view__views" aria-label="조회수">조회수 123</span>
+        </div>
+        <dl class="bl-view__facts">
+          <div><dt>저자</dt><dd>Silberschatz</dd></div>
+          <div><dt>과목</dt><dd>OS</dd></div>
+          <div><dt>희망가</dt><dd><strong>₩8,000</strong></dd></div>
+          <div><dt>등록일</dt><dd>2025-09-30</dd></div>
+          <div><dt>닉네임</dt><dd>캠퍼스북러버</dd></div>
+        </dl>
+      </header>
+
+      <section class="bl-view__content" aria-labelledby="contentTitle">
+        <h2 id="contentTitle" class="sr-only">상세 설명</h2>
+        <p class="bl-view__text">표지/내지 깨끗합니다. 형광펜 표시 2페이지 정도 있습니다. 교내 도서관 로비에서 직거래 선호합니다.</p>
+        <div class="bl-view__thumbs" aria-label="이미지 썸네일" data-role="thumbs" hidden>
+          <!-- 이미지는 JavaScript에서 동적으로 추가됩니다 -->
+        </div>
+      </section>
+
+      <section class="bl-view__contact" aria-labelledby="contactTitle">
+        <h2 id="contactTitle">연락 수단</h2>
+        <ul>
+          <li>이메일: example@mail.local</li>
+          <li>전화: 010-0000-0000</li>
+          <li>오픈채팅: https://open.kakao.com/o/xxxx</li>
+        </ul>
+        <div class="bl-view__actions">
+          <a class="btn" href="/pages/list.html">목록으로</a>
+          <button class="btn" id="editBtn">수정</button>
+          <button class="btn" id="deleteBtn">삭제</button>
+        </div>
+      </section>
+
+      <section class="bl-view__comments" aria-labelledby="commentsTitle">
+        <h2 id="commentsTitle">댓글</h2>
+        <ul class="bl-comments" data-role="comments">
+          <li>
+            <strong>써니</strong>
+            <p>주말에 거래 가능할까요?</p>
+          </li>
+          <li>
+            <strong>김학생</strong>
+            <p>상태 좋아 보이네요. 가격 네고 가능한가요?</p>
+          </li>
+        </ul>
+        <p class="bl-emptystate" data-role="comments-empty" hidden>아직 댓글이 없습니다.</p>
+
+        <form class="bl-commentform" aria-label="댓글 작성" novalidate>
+          <div class="bl-commentform__row">
+            <input type="text" name="nickname" placeholder="닉네임">
+            <input type="password" name="password" placeholder="댓글 비밀번호">
+          </div>
+          <textarea name="content" rows="3" placeholder="댓글 내용"></textarea>
+          <div class="bl-commentform__actions">
+            <button type="submit" class="btn btn--primary">댓글 등록</button>
+          </div>
+        </form>
+      </section>
+    </article>
+  </main>
+
+  <footer class="bl-footer" role="contentinfo">
+    <small class="muted">안전거래 유의 | 불법·사기 신고 안내</small>
+  </footer>
+
+  <!-- Password verification modal -->
+  <div id="passwordModal" class="modal" aria-hidden="true">
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="passwordTitle">
+      <h3 id="passwordTitle">비밀번호 확인</h3>
+      <form id="passwordForm">
+        <label>비밀번호<input type="password" name="password" required></label>
+        <div class="bl-actions">
+          <button type="submit" class="btn btn--primary">확인</button>
+          <button type="button" class="btn" data-modal-close="passwordModal">취소</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/js/core/dom.js"></script>
+  <script src="/assets/js/core/data.js"></script>
+  <script src="/assets/js/components/modal.js"></script>
+  <script src="/assets/js/pages/view.js"></script>
+</body>
+</html>
+
+

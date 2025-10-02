@@ -1,0 +1,8 @@
+.bl-cardgrid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.bl-card{border:1px solid var(--bl-border); border-radius:var(--bl-radius); background:#fff; box-shadow:var(--bl-shadow); padding:18px}
+.bl-card__title{font-weight:700; margin-bottom:8px}
+.bl-card__meta{color:var(--bl-muted); font-size:14px; margin-bottom:10px}
+.bl-card__price{font-weight:800; color:var(--bl-primary)}
+.bl-emptystate{color:var(--bl-muted); padding:24px 0}
+
+

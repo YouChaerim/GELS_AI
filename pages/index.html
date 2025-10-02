@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookLoop - 메인</title>
+  <link rel="stylesheet" href="/assets/css/base/reset.css">
+  <link rel="stylesheet" href="/assets/css/base/variables.css">
+  <link rel="stylesheet" href="/assets/css/base/utilities.css">
+  <link rel="stylesheet" href="/assets/css/components/header.css">
+  <link rel="stylesheet" href="/assets/css/components/nav.css">
+  <link rel="stylesheet" href="/assets/css/components/footer.css">
+  <link rel="stylesheet" href="/assets/css/components/card.css">
+  <link rel="stylesheet" href="/assets/css/components/modal.css">
+  <link rel="stylesheet" href="/assets/css/pages/index.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">본문 바로가기</a>
+
+  <header class="bl-header" role="banner">
+    <div class="bl-header__inner">
+      <a class="bl-logo" href="/pages/index.html" aria-label="BookLoop 홈">BookLoop</a>
+      <form class="bl-quicksearch" aria-label="빠른검색">
+        <label class="sr-only" for="q">제목/저자/과목</label>
+        <input id="q" name="q" type="search" placeholder="제목/저자/과목">
+        <button type="submit">검색</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="bl-nav" role="navigation" aria-label="주요 메뉴">
+    <ul class="bl-nav__menu">
+      <li><a href="/pages/index.html" aria-current="page">메인</a></li>
+      <li><a href="/pages/list.html">교환 게시판</a></li>
+      <li><a href="/pages/guide.html">거래 가이드</a></li>
+      <li><a href="/pages/write.html">글쓰기</a></li>
+    </ul>
+  </nav>
+
+  <main id="main" class="bl-main" role="main">
+    <section class="bl-hero" aria-labelledby="heroTitle">
+      <h1 id="heroTitle">안전하고 간편한 교환을 위한 체크리스트 보기</h1>
+      <p class="bl-hero__desc">처음이더라도 안전하게 거래하세요.</p>
+      <a class="bl-hero__cta" href="/pages/guide.html">체크리스트 보기</a>
+    </section>
+
+    <section class="bl-filters" aria-label="퀵 필터">
+      <div class="bl-filters__row">
+        <label for="subject">과목</label>
+        <select id="subject" name="subject">
+          <option value="">전체</option>
+          <option value="OS">운영체제 (OS)</option>
+          <option value="DB">데이터베이스 (DB)</option>
+          <option value="Network">네트워크 (Network)</option>
+        </select>
+
+        <label for="condition">상태</label>
+        <select id="condition" name="condition">
+          <option value="">전체</option>
+          <option value="상">상</option>
+          <option value="중">중</option>
+          <option value="하">하</option>
+        </select>
+
+        <label for="sort">가격정렬</label>
+        <select id="sort" name="sort">
+          <option value="price_asc">낮→높</option>
+          <option value="price_desc">높→낮</option>
+        </select>
+
+        <button id="filterApply" type="button">검색</button>
+      </div>
+    </section>
+
+    <section class="bl-grid" aria-labelledby="gridTitle">
+      <div class="bl-grid__head">
+        <h2 id="gridTitle">인기/최근 도서</h2>
+        <a class="bl-grid__more" href="/pages/list.html">전체 보기 →</a>
+      </div>
+
+      <div class="bl-cardgrid" data-role="cardgrid">
+        <p class="bl-emptystate" data-role="emptystate" hidden>표시할 도서가 없습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bl-footer" role="contentinfo">
+    <small>© BookLoop</small>
+    <a href="/pages/guide.html">이용안내</a>
+    <a href="mailto:contact@bookloop.local">문의메일</a>
+  </footer>
+
+  <script src="/assets/js/core/dom.js"></script>
+  <script src="/assets/js/core/data.js"></script>
+  <script src="/assets/js/components/modal.js"></script>
+  <script src="/assets/js/components/header-search.js"></script>
+  <script src="/assets/js/pages/index.js"></script>
+</body>
+</html>
+
+
